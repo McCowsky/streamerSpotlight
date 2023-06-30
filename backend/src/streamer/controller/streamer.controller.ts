@@ -8,11 +8,13 @@ import {
   Param,
   NotFoundException,
   Put,
+  ConflictException,
 } from '@nestjs/common';
 import { Response } from 'express';
 
 import { StreamerService } from '../service/streamer.service';
 import { Streamer } from '../streamer.entity';
+import { UpdateResult } from 'typeorm';
 
 @Controller('streamer')
 export class StreamerController {
@@ -21,14 +23,13 @@ export class StreamerController {
   @Post('/streamers')
   async addStreamer(@Res() response: Response, @Body() streamer: Streamer) {
     if (await this.streamerService.doesStreamerExists(streamer))
-      return response.status(HttpStatus.OK).json({
-        message: 'Streamer already exists',
-      });
+      throw new ConflictException('Streamer already exists');
+
     const newStreamer: Streamer = await this.streamerService.addStreamer(
       streamer,
     );
     return response.status(HttpStatus.OK).json({
-      message: 'created succesfully',
+      message: 'Streamer added succesfully',
       newStreamer,
     });
   }
@@ -56,20 +57,17 @@ export class StreamerController {
   async updateStreamer(
     @Res() response: Response,
     @Param('streamerId') streamerId: number,
-    @Body() vote: { vote: boolean },
+    @Body() vote: { sign: string },
   ) {
     const streamer: Streamer = await this.streamerService.getStreamer(
       streamerId,
     );
     if (!streamer) throw new NotFoundException('Streamer does not exists');
 
-    const updatedStreamer = await this.streamerService.updateStreamer(
-      streamerId,
-      streamer,
-      vote.vote,
-    );
+    const updatedStreamer: UpdateResult =
+      await this.streamerService.updateStreamer(streamerId, vote.sign);
     return response.status(HttpStatus.OK).json({
-      message: 'updated succesfully',
+      message: 'Your vote has been submitted',
       updatedStreamer,
     });
   }

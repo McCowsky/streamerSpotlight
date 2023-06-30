@@ -14,7 +14,7 @@ export class Streamer {
   @Column({ type: 'varchar' })
   name: string;
 
-  @Column({ type: 'text' })
+  @Column({ default: '', type: 'text' })
   description: string;
 
   @Column({ type: 'varchar' })

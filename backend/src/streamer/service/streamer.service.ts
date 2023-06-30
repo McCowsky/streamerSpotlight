@@ -16,7 +16,9 @@ export class StreamerService {
   }
 
   async getAllStreamers(): Promise<Streamer[]> {
-    const streamers: Streamer[] = await this.StreamerRepository.find();
+    const streamers: Streamer[] = await this.StreamerRepository.find({
+      order: { votes: 'DESC' },
+    });
     return streamers;
   }
 
@@ -29,16 +31,16 @@ export class StreamerService {
 
   async updateStreamer(
     streamerId: number,
-    streamer: Streamer,
-    vote: boolean,
+    vote: string,
   ): Promise<UpdateResult> {
     let updatedStreamer: UpdateResult;
-    if (vote)
+
+    if (vote === '+')
       updatedStreamer = await this.StreamerRepository.update(streamerId, {
         votes: () => 'votes + 1',
         updatedAt: new Date(),
       });
-    if (!vote)
+    if (vote === '-')
       updatedStreamer = await this.StreamerRepository.update(streamerId, {
         votes: () => 'votes - 1',
         updatedAt: new Date(),
