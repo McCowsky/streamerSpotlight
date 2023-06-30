@@ -5,7 +5,7 @@ import List from "./components/List";
 const Home: FunctionComponent = () => {
   return (
     <div className=" w-full h-screen flex">
-      <div className=" max-w-6xl w-fit py-10 m-auto h-fit ">
+      <div className=" max-w-6xl w-fit py-10 md:pt-2 m-auto md:mx-auto md:my-0 h-fit ">
         <h1 className="text-4xl font-semibold text-center pb-6 md:pb-10">
           Streamer Spotlight
         </h1>

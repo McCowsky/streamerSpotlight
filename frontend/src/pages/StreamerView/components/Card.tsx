@@ -32,7 +32,7 @@ const Card: FunctionComponent<CardProps> = ({ streamer }) => {
       <div className="flex items-center">
         <h3>{streamer.createdAt.slice(0, 10)}</h3>
         <button
-          className="ml-auto bg-[#8884FF] py-1 px-3 rounded-lg hover:text-white"
+          className="ml-auto bg-[#8884FF] py-1 px-3 rounded-lg hover:text-black text-white"
           onClick={() => navigate("/")}
         >
           Back
