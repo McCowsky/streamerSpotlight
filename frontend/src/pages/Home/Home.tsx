@@ -10,9 +10,8 @@ const Home: FunctionComponent = () => {
           Streamer Spotlight
         </h1>
         <p className="text-lg text-center px-60 xl:px-40 lg:px-32 pb-20 md:hidden">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit laboriosam,
-          voluptatibus vel quam dolore libero expedita at obcaecati minima ab officiis
-          nemo praesentium iure.
+          In this application, users can add their favorite streamers along with some
+          relevant details. Other users can then upvote or downvote these streamers.
         </p>
         <div className="flex justify-center items-center gap-20 md:gap-10 md:flex-col">
           <Form />
