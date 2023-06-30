@@ -7,7 +7,9 @@ import { UseMutationResult } from "react-query";
 import { AxiosError } from "axios";
 import { ErrorResponse, GenericResponse } from "../../../features/types";
 
-const PlatformTypeSchema = z.enum(["Twitch", "YouTube", "Kick", "Rumble", "TikTok"]);
+const PlatformTypeSchema = z.enum(["Twitch", "YouTube", "Kick", "Rumble", "TikTok"], {
+  errorMap: () => ({ message: "Please select streamers platform" }),
+});
 
 const streamerSchema = z.object({
   name: z
